@@ -1,5 +1,19 @@
 $primary-color: #0f927c;
 
+
+$primary: #0f927c;
+$danger: #ff4136;
+
+$theme-colors: (
+  "primary": $primary,
+  "danger": $danger
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+// @use '../node_modules/bootstrap/scss/bootstrap.scss';
+$primary: #0f927c;
+
 *,
 *::after,
 *::before {
@@ -11,3 +25,8 @@ $primary-color: #0f927c;
 body{
     font-family: Arial, sans-serif;
 }   
+
+h1 {
+  @extend .text-primary;
+  background-color: #000000;
+}

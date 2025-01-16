@@ -4,7 +4,7 @@ header {
     margin: 20px 0;
 }
 h4 {
-    color: $primary-color;
+    color: #0f927c;
 }
 @media (max-width: 1200px) {
     h4 {
@@ -18,8 +18,8 @@ h4 {
 }
 .banner {
     padding: 50px 5%;
-    background-color: $primary-color;
-    background: linear-gradient(300deg, #5fb0db 0%, $primary-color 60%, #86e9a4 100%);
+    background-color: #0f927c;
+    background: linear-gradient(300deg, #5fb0db 0%, #0f927c 60%, #86e9a4 100%);
     width: 100%;
     margin-top: 20px;
 }
