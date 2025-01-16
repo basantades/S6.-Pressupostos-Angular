@@ -1,0 +1,66 @@
+@import '../../../styles.scss';
+
+.services {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 840px;
+    margin: 40px auto;
+    padding: 0 40px;
+}
+
+
+.service {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .services {
+        padding: 0 40px;
+    }
+    .service {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+.service h3 {
+    color: $primary-color;
+    margin: 0;
+}
+
+.service p {
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.total {
+    max-width: 840px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;    
+    gap: 30px;
+    padding: 0 40px;
+}
+
+@media (max-width: 400px) {
+    .total {
+        flex-direction: column;
+        padding-right: 40px;
+        align-items: end;
+        gap: 10px;
+    }
+}

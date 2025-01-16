@@ -1,0 +1,33 @@
+@import '../../../styles.scss';
+
+header {
+    margin: 20px 0;
+}
+h4 {
+    color: $primary-color;
+}
+@media (max-width: 1200px) {
+    h4 {
+        padding: 0 20px;
+    }
+}
+@media (max-width: 768px) {
+    h4 {
+        text-align: center
+    }
+}
+.banner {
+    padding: 50px 5%;
+    background-color: $primary-color;
+    background: linear-gradient(300deg, #5fb0db 0%, $primary-color 60%, #86e9a4 100%);
+    width: 100%;
+    margin-top: 20px;
+}
+h1 {
+    margin: 0;
+    font-size: 32px;
+    text-align: center;
+    color: #fff;
+}
+
+
