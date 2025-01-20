@@ -1,25 +1,20 @@
-<form  class="services">
-    <div class="service">
-        <div>
-            <h3>Seo</h3>
-            <p>Programació d'una web responsive completa</p>
+
+<form class="services">
+    @for (budget of budgets; track budget.id) {
+        <div class=service>
+            <div class="description">
+                <h3>{{budget.title}}</h3>
+                <p>{{budget.descripcion}}</p>
+            </div>
+            <div class="price">{{budget.price}} €</div>
+            <label>
+                <input type="checkbox" id="checkbox-{{budget.id}}" (change)="onCheckboxChange($event, budget.price)"> Afegir
+            </label>
         </div>
-        <span class="price">300 €</span>
-        <label>
-            <input type="checkbox"> Afegir
-        </label>
-    </div>
-    <div class="service">
-        <div>
-            <h3>Seo</h3>
-            <p>Programació d'una web responsive completa</p>
-        </div>
-        <span class="price">300 €</span>
-        <label>
-            <input type="checkbox"> Afegir
-        </label>
-    </div>
+    }
+
 </form>
+
 <section class="total">
-    <h3>Preu pressupostat:</h3><h3><span class="price">0 €</span></h3>
+    <h4>Preu pressupostat:</h4><h4 class="price"><span>{{totalPrice}}</span> €</h4>
 </section>

@@ -1,32 +1,18 @@
-$primary-color: #0f927c;
-
-
-$primary: #0f927c;
-$danger: #ff4136;
+$nuevo-principal: #0f927c;
 
 $theme-colors: (
-  "primary": $primary,
-  "danger": $danger
+  "primary": $nuevo-principal
 );
 
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import  "../node_modules/bootstrap/scss/bootstrap.scss";
 
-// @use '../node_modules/bootstrap/scss/bootstrap.scss';
-$primary: #0f927c;
-
-*,
-*::after,
-*::before {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
-    font-family: Arial, sans-serif;
-}   
-
-h1 {
-  @extend .text-primary;
-  background-color: #000000;
+body {
+  font-family: Arial, sans-serif;
+  // @extend .bg-primary;
 }
