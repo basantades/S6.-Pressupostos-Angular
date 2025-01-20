@@ -1,14 +1,14 @@
 
 <form class="services">
     @for (budget of budgets; track budget.id) {
-        <div class=service>
+        <div class="service" id="service-{{budget.id}}">
             <div class="description">
                 <h3>{{budget.title}}</h3>
                 <p>{{budget.descripcion}}</p>
             </div>
             <div class="price">{{budget.price}} €</div>
             <label>
-                <input type="checkbox" id="checkbox-{{budget.id}}" (change)="onCheckboxChange($event, budget.price)"> Afegir
+                <input type="checkbox" id="checkbox-{{budget.id}}" (change)="onCheckboxChange($event, budget.price, budget.id)"> Afegir
             </label>
         </div>
     }
