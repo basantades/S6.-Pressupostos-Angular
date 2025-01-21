@@ -1,7 +1,8 @@
 
-<form class="services">
+<div  class="services">
     @for (budget of budgets; track budget.id) {
-        <div class="service" id="service-{{budget.id}}">
+        <div class="contenedor" id="service-{{budget.id}}">
+            <div  class="service">
             <div class="description">
                 <h3>{{budget.title}}</h3>
                 <p>{{budget.descripcion}}</p>
@@ -10,10 +11,16 @@
             <label>
                 <input type="checkbox" id="checkbox-{{budget.id}}" (change)="onCheckboxChange($event, budget.price, budget.id)"> Afegir
             </label>
+            </div>
+            @if (budget.additionalOptions) {
+            <div class="ocultar" id="options-{{budget.id}}">
+                <app-panel></app-panel>
+            </div>
+            }
         </div>
     }
 
-</form>
+</div>
 
 <section class="total">
     <h4>Preu pressupostat:</h4><h4 class="price"><span>{{totalPrice}}</span> €</h4>

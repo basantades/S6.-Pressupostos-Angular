@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Budget } from '../interfaces/budget';
 
 @Injectable({
@@ -6,6 +6,11 @@ import { Budget } from '../interfaces/budget';
 })
 export class BudgetService {
 
+  panelExtraPrice = signal<number>(0);
+  updateValue(newValue: number) {
+    this.panelExtraPrice.update(() => newValue);
+  }
+  
   budgets: Budget[] = [
     { 
       id: 1,
@@ -23,7 +28,8 @@ export class BudgetService {
       id: 3,
       title: "Web", 
       descripcion: "Programació d'una web responsive completa.",
-      price: 500
+      price: 500,
+      additionalOptions: true
     }
   ]
 

@@ -3,5 +3,5 @@ export interface Budget {
     title: string,
     descripcion: string,
     price: number,
-    // additionalOptions?: boolean,
+    additionalOptions?: boolean,
 }

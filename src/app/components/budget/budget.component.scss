@@ -5,11 +5,13 @@
     @extend .d-flex , .flex-column, .gap-5, .mx-auto, .my-5, .px-5;
     max-width: 840px;
 }
-
-.service {
-    @extend .d-flex, .justify-content-between, .align-items-center, .gap-3, .w-100, .rounded-4, .p-2, .px-4;
+.contenedor{
+    @extend .p-2, .px-4, .rounded-4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid #fff;
+}
+.service {
+    @extend .d-flex, .justify-content-between, .align-items-center, .gap-3, .w-100;
 }
 @media (max-width: 768px) {
     .services {
@@ -23,6 +25,7 @@
 }
 .service-active {
     border: 2px solid #0f927c;
+    transition: 1s;
 }
 
 .service h3 {
@@ -49,4 +52,9 @@
         align-items: end;
         gap: 10px;
     }
+}
+
+
+.ocultar {
+    display: none;
 }

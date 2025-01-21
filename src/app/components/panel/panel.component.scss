@@ -1,0 +1,59 @@
+
+.opciones-container {
+    margin-bottom: 0.3rem;
+    width: 100%;
+    display:flex;
+    justify-content: end;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: right;
+  }
+
+  .group {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0.5rem;
+  }
+  
+  input {
+    text-align: center;
+    width: 50px;
+    border: 1px solid #ccc;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+  .boton {
+    background-color: #0f927c;
+    color: #fff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .boton:hover {
+    background-color: #5fb0db;
+    transition: 0.5s;
+  }
+  
+  .boton:disabled {
+    background-color: #ccc;
+    cursor: initial;
+  }
