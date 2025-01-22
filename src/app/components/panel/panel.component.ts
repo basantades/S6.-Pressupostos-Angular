@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { BudgetService } from '../../services/budget.service';
 
 
@@ -11,32 +11,49 @@ import { BudgetService } from '../../services/budget.service';
 })
 export class PanelComponent {
 
-  countPages = new FormControl(1); 
-  countLanguages = new FormControl(1);
+  // panelForm = new FormGroup({
+  // countPages: new FormControl(1), 
+  // countLanguages:new FormControl(1),
+  // });
+
+  panelForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.panelForm = this.fb.group({
+      countPages: [1],
+      countLanguages: [1]
+    });
+  }
+
+
   panelExtraPrice = inject(BudgetService).panelExtraPrice;
 
   increment(type: string) {
     if (type === 'pages') {
-      if (this.countPages.value != null) this.countPages.setValue(this.countPages.value + 1);
+      const currentValue = this.panelForm.get('countPages')?.value || 1;
+    this.panelForm.get('countPages')?.setValue(currentValue + 1);
     } else if (type === 'languages') {  
-      if (this.countLanguages.value != null) this.countLanguages.setValue(this.countLanguages.value + 1);
+      const currentValue = this.panelForm.get('countLanguages')?.value || 1;
+    this.panelForm.get('countLanguages')?.setValue(currentValue + 1);
     }
     this.calculateExtraPrice();
   }
 
   decrement(type: string) {  
     if (type === 'pages') {
-      if (this.countPages.value != null) this.countPages.setValue(this.countPages.value - 1);
+      const currentValue = this.panelForm.get('countPages')?.value || 1;
+    this.panelForm.get('countPages')?.setValue(currentValue - 1);
     } else if (type === 'languages') {  
-      if (this.countLanguages.value != null) this.countLanguages.setValue(this.countLanguages.value - 1);
+      const currentValue = this.panelForm.get('countLanguages')?.value || 1;
+    this.panelForm.get('countLanguages')?.setValue(currentValue - 1);
     }
     this.calculateExtraPrice();
   }
 
-  disbledButton() {
+  disabledButton() {
       const botondecrementar = document.querySelector('#boton-decrementar-pages');
       if (botondecrementar) { 
-        if (this.countPages.value === 1) {
+        if (this.panelForm.get('countPages')?.value === 1) {
           botondecrementar.setAttribute('disabled', 'true');
         } else {
           botondecrementar.removeAttribute('disabled');
@@ -44,28 +61,22 @@ export class PanelComponent {
       }
         const botondecrementarLanguages = document.querySelector('#boton-decrementar-languages');
         if (botondecrementarLanguages) { 
-          if (this.countLanguages.value === 1) {
+          if (this.panelForm.get('countLanguages')?.value === 1) {
             botondecrementarLanguages.setAttribute('disabled', 'true');
           } else {
             botondecrementarLanguages.removeAttribute('disabled');
           }
         }
   }
-  
-  actualizeValue() {
-    let currentValue = this.budgetService.panelExtraPrice();
-    this.budgetService.updateValue(currentValue);
-  }
+
   
   calculateExtraPrice() {
-    this.panelExtraPrice.update(value => (this.countPages.value ?? 1) * (this.countLanguages.value ?? 1) * 30 - 30);
-    this.actualizeValue();
-    this.disbledButton();
+    this.panelExtraPrice.update(value => (this.panelForm.get('countPages')?.value || 1) * (this.panelForm.get('countLanguages')?.value || 1) * 30 - 30);
+    this.disabledButton();
   }
 
-
-  constructor(private budgetService: BudgetService) {}
-
-
+  resetForm(): void {
+    this.panelForm.reset({ countPages: 1, countLanguages: 1 });
+  }
 
 }

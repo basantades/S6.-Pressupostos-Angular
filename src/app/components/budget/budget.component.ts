@@ -1,4 +1,4 @@
-import { Component, Input, inject, effect} from '@angular/core';
+import { Component, Input, inject, effect, ViewChild} from '@angular/core';
 import { Budget } from '../../interfaces/budget';
 import { BudgetService } from '../../services/budget.service';
 import { PanelComponent } from '../panel/panel.component';
@@ -58,13 +58,21 @@ totalPrice: number = 0;
 
   removeActive(id: number) {
     const serviceElement = document.getElementById(`service-${id}`);
-    // const optionsElement = document.getElementById(`options-${id}`);
+    const optionsElement = document.getElementById(`options-${id}`);
     if (serviceElement) {
       serviceElement.classList.remove('service-active');
     }
-    // if (optionsElement) {
-    //   optionsElement.classList.add('ocultar');
-    // }
+    if (optionsElement) {
+      this.resetChildForm()
+      optionsElement.classList.add('ocultar');
+    }
+  }
+
+  @ViewChild(PanelComponent) childComponent!: PanelComponent;
+
+  resetChildForm(): void {
+    this.childComponent.resetForm();
+    this.childComponent.calculateExtraPrice();
   }
 
 }

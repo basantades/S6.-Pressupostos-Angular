@@ -1,9 +1,9 @@
-<!-- <form> -->
+<form [formGroup]="panelForm">
   <div class="opciones-container">
     <label for="pages">Nombre de pàgines</label>
     <div class="group">
       <button class="boton" id="boton-decrementar-pages" (click)="decrement('pages')" disabled>-</button>
-      <input type="number" id="pages" [formControl]="countPages" min="1" (change)="calculateExtraPrice()">
+      <input type="number" id="pages" formControlName="countPages" min="1" (input)="calculateExtraPrice()">
       <button class="boton" (click)="increment('pages')">+</button>
     </div>
   </div>
@@ -12,9 +12,9 @@
     <label for="languages">Nombre de llenguatges</label>
     <div class="group">
       <button class="boton" id="boton-decrementar-languages" (click)="decrement('languages')" disabled>-</button>
-      <input type="number" id="languages" [formControl]="countLanguages" min="1" (change)="calculateExtraPrice()"> 
+      <input type="number" id="languages" formControlName="countLanguages" min="1" (input)="calculateExtraPrice()"> 
       <button class="boton" (click)="increment('languages')" >+</button>
     </div>
   </div>
-<!-- </form> -->
-  <div>paginas: {{countPages.value}}, llenguatges: {{countLanguages.value}}, Precio extra: {{panelExtraPrice()}}</div>
+</form>
+  <!-- <div>paginas: {{this.panelForm.get('countPages')?.value || 1}}, llenguatges: {{this.panelForm.get('countLanguages')?.value || 1}}, Precio extra: {{panelExtraPrice()}}</div> -->
