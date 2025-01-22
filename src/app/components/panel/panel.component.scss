@@ -7,10 +7,18 @@
     gap: 1rem;
     align-items: center;
   }
+  @media screen and (max-width: 768px) {
+    .opciones-container {
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+  }
 
   label {
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    // margin-bottom: 0.5rem;
     text-align: right;
   }
 

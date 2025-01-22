@@ -1,20 +1,50 @@
 <form [formGroup]="panelForm">
   <div class="opciones-container">
-    <label for="pages">Nombre de pàgines</label>
+    <label for="pages" class="d-inline-flex align-items-center gap-2"><i class="bi bi-info-circle text-primary fs-5" data-bs-toggle="modal" data-bs-target="#modalPages" 
+      data-bs-auto-close="outside" type="button"></i> Nombre de pàgines</label>
     <div class="group">
-      <button class="boton" id="boton-decrementar-pages" (click)="decrement('pages')" disabled>-</button>
+      <button class="boton" id="boton-decrementar-pages" (click)="decrement('pages')" disabled><i class="bi bi-dash-lg"></i></button>
       <input type="number" id="pages" formControlName="countPages" min="1" (input)="calculateExtraPrice()">
-      <button class="boton" (click)="increment('pages')">+</button>
+      <button class="boton" (click)="increment('pages')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>
   
   <div class="opciones-container">
-    <label for="languages">Nombre de llenguatges</label>
+    <label for="languages" class="d-inline-flex align-items-center gap-2"><i class="bi bi-info-circle text-primary fs-5" data-bs-toggle="modal" data-bs-target="#modalLanguages" 
+      data-bs-auto-close="outside" type="button"></i> Nombre de llenguatges</label>
     <div class="group">
-      <button class="boton" id="boton-decrementar-languages" (click)="decrement('languages')" disabled>-</button>
+      <button class="boton" id="boton-decrementar-languages" (click)="decrement('languages')" disabled><i class="bi bi-dash-lg"></i></button>
       <input type="number" id="languages" formControlName="countLanguages" min="1" (input)="calculateExtraPrice()"> 
-      <button class="boton" (click)="increment('languages')" >+</button>
+      <button class="boton" (click)="increment('languages')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>
 </form>
   <!-- <div>paginas: {{this.panelForm.get('countPages')?.value || 1}}, llenguatges: {{this.panelForm.get('countLanguages')?.value || 1}}, Precio extra: {{panelExtraPrice()}}</div> -->
+
+  
+  <!-- Modals -->
+  <div class="modal fade" id="modalPages" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+        <button type="button" class="btn-close m-3 ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="mx-3 mb-4 text-center">
+        <h4 class="mb-3">Nombre de pàgines</h4>
+        <p>Afegeix el nombre de pàgines que tindra el teu projecte. <br>
+        El preu extra per aquesta opció es de 30€ per pàgina.</p>
+        </div>
+			</div>
+		</div>
+	</div>
+
+  <div class="modal fade" id="modalLanguages" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+        <button type="button" class="btn-close m-3 ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="mx-3 mb-4 text-center">
+        <h4 class="mb-3">Nombre de llenguatges</h4>
+        <p>Afegeix el nombre de llenguatges que tindra el teu projecte. <br>
+        El preu extra per aquesta opció es de 30€ per llenguatge.</p>
+        </div>
+			</div>
+		</div>
+	</div>

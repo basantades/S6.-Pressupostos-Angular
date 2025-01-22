@@ -19,8 +19,9 @@
     }
     .service {
         flex-direction: column;
-        padding: 20px;
+        gap: 0 !important;
         text-align: center;
+        margin-bottom: 1rem;
     }
 }
 .service-active {
@@ -29,10 +30,10 @@
 }
 
 .service h3 {
-    @extend .text-primary, .mt-2;
+    @extend .text-primary, .fw-bolder, .mt-2;
 }
 .description {
-    width: 360px;
+    max-width: 360px;
 }
 
 .price {
@@ -41,7 +42,7 @@
 
 
 .total {
-    @extend .d-flex, .justify-content-end, .align-items-center, .gap-4, .mx-auto, .px-5;
+    @extend .d-flex, .justify-content-end, .align-items-center, .gap-4, .mx-auto, .mb-3, .px-5;
     max-width: 840px;
 }
 
@@ -50,7 +51,7 @@
         flex-direction: column;
         padding-right: 40px;
         align-items: end;
-        gap: 10px;
+        gap: 0 !important;
     }
 }
 
