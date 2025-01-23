@@ -23,37 +23,47 @@ export class PanelComponent {
 
   panelExtraPrice = inject(BudgetService).panelExtraPrice;
 
+
+
+  checkPages() {
+    const currentValue = this.panelForm.get('countPages')?.value || 1;
+    if (isNaN(currentValue) || currentValue < 1) {
+      this.panelForm.get('countPages')?.setValue(1);
+    }
+    this.calculateExtraPrice()
+  }
+
+  checkLanguages() {
+    const currentValue = this.panelForm.get('countLanguages')?.value || 1;
+    if (isNaN(currentValue) || currentValue < 1) {
+      this.panelForm.get('countLanguages')?.setValue(1);
+    }
+    this.calculateExtraPrice()
+  }
+
   increment(type: string) {
     if (type === 'pages') {
       const currentValue = this.panelForm.get('countPages')?.value || 1;
-      this.panelForm.get('countPages')?.setValue(this.validateValue(currentValue + 1));
-    } else if (type === 'languages') {
+    this.panelForm.get('countPages')?.setValue(currentValue + 1);
+    this.checkPages()
+    } else if (type === 'languages') {  
       const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-      this.panelForm.get('countLanguages')?.setValue(this.validateValue(currentValue + 1));
+    this.panelForm.get('countLanguages')?.setValue(currentValue + 1);
+    this.checkLanguages()
     }
-    this.calculateExtraPrice();
   }
-  
-  decrement(type: string) {
+
+  decrement(type: string) {  
     if (type === 'pages') {
       const currentValue = this.panelForm.get('countPages')?.value || 1;
-      this.panelForm.get('countPages')?.setValue(this.validateValue(currentValue - 1));
-    } else if (type === 'languages') {
+    this.panelForm.get('countPages')?.setValue(currentValue - 1);
+    this.checkPages()
+    } else if (type === 'languages') {  
       const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-      this.panelForm.get('countLanguages')?.setValue(this.validateValue(currentValue - 1));
+    this.panelForm.get('countLanguages')?.setValue(currentValue - 1);
+    this.checkLanguages()
     }
-    this.calculateExtraPrice();
   }
-  
-  // Función para validar el valor
-  private validateValue(value: any): number {
-    // Si el valor no es un número o es menor que 1, retorna 1
-    if (isNaN(value) || value < 1) {
-      return 1;
-    }
-    return value;
-  }
-  
 
   disabledButton() {
       const botondecrementar = document.querySelector('#boton-decrementar-pages');

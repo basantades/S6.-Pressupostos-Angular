@@ -4,7 +4,7 @@
       data-bs-auto-close="outside" type="button"></i> Nombre de pàgines</label>
     <div class="group">
       <button class="boton" id="boton-decrementar-pages" (click)="decrement('pages')" disabled><i class="bi bi-dash-lg"></i></button>
-      <input type="number" id="pages" formControlName="countPages" min="1" (input)="calculateExtraPrice()">
+      <input type="number" id="pages" formControlName="countPages" min="1" (input)="checkPages()">
       <button class="boton" (click)="increment('pages')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>
@@ -14,7 +14,7 @@
       data-bs-auto-close="outside" type="button"></i> Nombre de llenguatges</label>
     <div class="group">
       <button class="boton" id="boton-decrementar-languages" (click)="decrement('languages')" disabled><i class="bi bi-dash-lg"></i></button>
-      <input type="number" id="languages" formControlName="countLanguages" min="1" (input)="calculateExtraPrice()"> 
+      <input type="number" id="languages" formControlName="countLanguages" min="1" (input)="checkLanguages()"> 
       <button class="boton" (click)="increment('languages')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>

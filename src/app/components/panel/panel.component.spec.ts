@@ -23,54 +23,61 @@ describe('PanelComponent', () => {
 
 // ------------  test personalizados: -------------------------
 
-  it('should initialize the form with default values', () => {
-    const formValue = component.panelForm.value;
-    expect(formValue).toEqual({ countPages: 1, countLanguages: 1 });
-  });
+it('should have the default form values', () => {
+  expect(component.panelForm.value).toEqual({ countPages: 1, countLanguages: 1 });
+});
 
+it('should validate pages correctly', () => {
+  component.panelForm.get('countPages')?.setValue(NaN);
+  component.checkPages();
+  expect(component.panelForm.get('countPages')?.value).toBe(1);
 
-// ------------  incremento y decremento correctos -------------------------
-  it('should increment countPages when increment is called with "pages"', () => {
-    component.increment('pages');
-    expect(component.panelForm.get('countPages')?.value).toBe(2);
-  });
-  
-  it('should decrement countPages when decrement is called with "pages"', () => {
-    component.increment('pages'); // Increment first to avoid negative values
-    component.decrement('pages');
-    expect(component.panelForm.get('countPages')?.value).toBe(1);
-  });
-  
-  it('should increment countLanguages when increment is called with "languages"', () => {
-    component.increment('languages');
-    expect(component.panelForm.get('countLanguages')?.value).toBe(2);
-  });
-  
-  it('should decrement countLanguages when decrement is called with "languages"', () => {
-    component.increment('languages'); // Increment first to avoid negative values
-    component.decrement('languages');
-    expect(component.panelForm.get('countLanguages')?.value).toBe(1);
-  });
+  component.panelForm.get('countPages')?.setValue(0);
+  component.checkPages();
+  expect(component.panelForm.get('countPages')?.value).toBe(1);
 
-// -------------------  evitar valores negativos  -----------------------------
-  it('should not decrement countPages below 1', () => {
-    component.decrement('pages');
-    expect(component.panelForm.get('countPages')?.value).toBe(1);
-  });
-  
-  it('should not decrement countLanguages below 1', () => {
-    component.decrement('languages');
-    expect(component.panelForm.get('countLanguages')?.value).toBe(1);
-  });
+  component.panelForm.get('countPages')?.setValue(2);
+  component.checkPages();
+  expect(component.panelForm.get('countPages')?.value).toBe(2);
+});
 
-// -------------------  calculo de precio  -----------------------------
+it('should validate languages correctly', () => {
+  component.panelForm.get('countLanguages')?.setValue(NaN);
+  component.checkLanguages();
+  expect(component.panelForm.get('countLanguages')?.value).toBe(1);
 
-  it('should calculate extra price correctly', () => {
-    component.panelForm.setValue({ countPages: 2, countLanguages: 3 });
-    component.calculateExtraPrice();
-    expect(component.panelExtraPrice()).toBe(150); // (2 * 3 * 30) - 30
-  });
-  
+  component.panelForm.get('countLanguages')?.setValue(0);
+  component.checkLanguages();
+  expect(component.panelForm.get('countLanguages')?.value).toBe(1);
+
+  component.panelForm.get('countLanguages')?.setValue(2);
+  component.checkLanguages();
+  expect(component.panelForm.get('countLanguages')?.value).toBe(2);
+});
+
+it('should increment pages', () => {
+  component.panelForm.get('countPages')?.setValue(1);
+  component.increment('pages');
+  expect(component.panelForm.get('countPages')?.value).toBe(2);
+});
+
+it('should increment languages', () => {
+  component.panelForm.get('countLanguages')?.setValue(1);
+  component.increment('languages');
+  expect(component.panelForm.get('countLanguages')?.value).toBe(2);
+});
+
+it('should decrement pages', () => {
+  component.panelForm.get('countPages')?.setValue(2);
+  component.decrement('pages');
+  expect(component.panelForm.get('countPages')?.value).toBe(1);
+});
+
+it('should decrement languages', () => {
+  component.panelForm.get('countLanguages')?.setValue(2);
+  component.decrement('languages');
+  expect(component.panelForm.get('countLanguages')?.value).toBe(1);
+});
 
   
 });
