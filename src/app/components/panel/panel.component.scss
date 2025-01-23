@@ -65,3 +65,17 @@ input[type=number] { -moz-appearance:textfield; }
     background-color: #ccc;
     cursor: initial;
   }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-fade {
+    animation: fade 1s ease-in-out;
+  }
+

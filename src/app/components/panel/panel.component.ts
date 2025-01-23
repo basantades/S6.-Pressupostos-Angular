@@ -11,11 +11,6 @@ import { BudgetService } from '../../services/budget.service';
 })
 export class PanelComponent {
 
-  // panelForm = new FormGroup({
-  // countPages: new FormControl(1), 
-  // countLanguages:new FormControl(1),
-  // });
-
   panelForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -31,24 +26,34 @@ export class PanelComponent {
   increment(type: string) {
     if (type === 'pages') {
       const currentValue = this.panelForm.get('countPages')?.value || 1;
-    this.panelForm.get('countPages')?.setValue(currentValue + 1);
-    } else if (type === 'languages') {  
+      this.panelForm.get('countPages')?.setValue(this.validateValue(currentValue + 1));
+    } else if (type === 'languages') {
       const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-    this.panelForm.get('countLanguages')?.setValue(currentValue + 1);
+      this.panelForm.get('countLanguages')?.setValue(this.validateValue(currentValue + 1));
     }
     this.calculateExtraPrice();
   }
-
-  decrement(type: string) {  
+  
+  decrement(type: string) {
     if (type === 'pages') {
       const currentValue = this.panelForm.get('countPages')?.value || 1;
-    this.panelForm.get('countPages')?.setValue(currentValue - 1);
-    } else if (type === 'languages') {  
+      this.panelForm.get('countPages')?.setValue(this.validateValue(currentValue - 1));
+    } else if (type === 'languages') {
       const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-    this.panelForm.get('countLanguages')?.setValue(currentValue - 1);
+      this.panelForm.get('countLanguages')?.setValue(this.validateValue(currentValue - 1));
     }
     this.calculateExtraPrice();
   }
+  
+  // Función para validar el valor
+  private validateValue(value: any): number {
+    // Si el valor no es un número o es menor que 1, retorna 1
+    if (isNaN(value) || value < 1) {
+      return 1;
+    }
+    return value;
+  }
+  
 
   disabledButton() {
       const botondecrementar = document.querySelector('#boton-decrementar-pages');
@@ -69,7 +74,6 @@ export class PanelComponent {
         }
   }
 
-  
   calculateExtraPrice() {
     this.panelExtraPrice.update(value => (this.panelForm.get('countPages')?.value || 1) * (this.panelForm.get('countLanguages')?.value || 1) * 30 - 30);
     this.disabledButton();

@@ -10,5 +10,5 @@ import { BudgetComponent } from "./components/budget/budget.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'S6.-Pressupostos';
+  title = 'Aconsegueix la millor qualitat';
 }
