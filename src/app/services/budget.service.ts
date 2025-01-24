@@ -6,10 +6,15 @@ import { Budget } from '../interfaces/budget';
 })
 export class BudgetService {
 
+  pages = signal<number>(1);
+  languages = signal<number>(1);
   panelExtraPrice = signal<number>(0);
-  updateValue(newValue: number) {
-    this.panelExtraPrice.update(() => newValue);
-  }
+  serviciosContratados = signal<Budget[]>([]);
+
+
+  // updateValue(newValue: number) {
+  //   this.panelExtraPrice.update(() => newValue);
+  // }
   
   budgets: Budget[] = [
     { 

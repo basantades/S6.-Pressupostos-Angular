@@ -22,6 +22,8 @@ export class PanelComponent {
 
 
   panelExtraPrice = inject(BudgetService).panelExtraPrice;
+  pages = inject(BudgetService).pages;
+  languages = inject(BudgetService).languages;
 
 
 
@@ -30,7 +32,7 @@ export class PanelComponent {
     if (isNaN(currentValue) || currentValue < 1) {
       this.panelForm.get('countPages')?.setValue(1);
     }
-    this.calculateExtraPrice()
+    this.update()
   }
 
   checkLanguages() {
@@ -38,7 +40,7 @@ export class PanelComponent {
     if (isNaN(currentValue) || currentValue < 1) {
       this.panelForm.get('countLanguages')?.setValue(1);
     }
-    this.calculateExtraPrice()
+    this.update()
   }
 
   increment(type: string) {
@@ -84,7 +86,9 @@ export class PanelComponent {
         }
   }
 
-  calculateExtraPrice() {
+  update() {
+    this.pages.update(value => this.panelForm.get('countPages')?.value || 1);
+    this.languages.update(value => this.panelForm.get('countLanguages')?.value || 1);
     this.panelExtraPrice.update(value => (this.panelForm.get('countPages')?.value || 1) * (this.panelForm.get('countLanguages')?.value || 1) * 30 - 30);
     this.disabledButton();
   }

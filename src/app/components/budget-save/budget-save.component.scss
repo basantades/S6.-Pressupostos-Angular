@@ -1,0 +1,20 @@
+@use '../../../styles.scss';
+
+.banner-cabecera {
+    @extend .rounded-top-4;
+    padding: 10px 26px;
+    background-color: #0f927c;
+    background: linear-gradient(300deg, #5fb0db 0%, #0f927c 60%, #86e9a4 100%);
+    width: 100%;
+    color: #fff;
+    text-align: center;
+
+}
+
+
+
+@media (max-width: 768px) {
+    .banner-cabecera {
+        text-align: center;
+    }
+}

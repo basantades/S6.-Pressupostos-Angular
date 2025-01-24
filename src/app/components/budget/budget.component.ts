@@ -16,33 +16,45 @@ export class BudgetComponent {
 
 BudgetService = inject(BudgetService);
 
-valueExtra: number = 0;
+pages = inject(BudgetService).pages;
+languages = inject(BudgetService).languages;
+panelExtraPrice = inject(BudgetService).panelExtraPrice;
+serviciosContratados = inject(BudgetService).serviciosContratados
 
 constructor(private budgetService: BudgetService) {
   this.budgets = this.BudgetService.getBudgets()
   effect(() => {
-    this.valueExtra = this.budgetService.panelExtraPrice();
-    this.budgetService.budgets[2].price = 500 + this.valueExtra
     this.actualizeTotalPrice();
   });
 }
-serviciosContratados: Budget[] = [];
+serviciosPresu: Budget[] = [];
 totalPrice: number = 0;
 
   onCheckboxChange(event: any, budgetPrice: number, budgetId: number) {
     if (event.target.checked) {
-      this.serviciosContratados.push(this.budgets.find(budget => budget.id === budgetId)!);
+      this.serviciosPresu.push(this.budgets.find(budget => budget.id === budgetId)!);
       this.actualizeTotalPrice() 
       this.addActive(budgetId);
     } else {
-      this.serviciosContratados = this.serviciosContratados.filter(budget => budget.id !== budgetId);
+      this.serviciosPresu = this.serviciosPresu.filter(budget => budget.id !== budgetId);
       this.actualizeTotalPrice() 
       this.removeActive(budgetId);
     }
+    this.actualiceServiciosContratados();
+  }
+
+  actualiceServiciosContratados() {
+    this.budgetService.serviciosContratados.set(this.serviciosPresu);
   }
 
   actualizeTotalPrice() {
-    this.totalPrice = this.serviciosContratados.reduce((total, budget) => total + budget.price, 0);
+    this.budgetService.budgets[2].price = 500 + this.panelExtraPrice()
+    this.totalPrice = this.serviciosPresu.reduce((total, budget) => total + budget.price, 0);
+    // if (this.serviciosPresu.find(budget => budget.title === "Web")) {
+    //   this.totalPrice += this.panelExtraPrice();
+    // // } else {
+    // //   console.log("no entra al if" + this.panelExtraPrice())
+    // }
   }
 
   addActive(id: number) {
@@ -72,7 +84,7 @@ totalPrice: number = 0;
 
   resetChildForm(): void {
     this.childComponent.resetForm();
-    this.childComponent.calculateExtraPrice();
+    this.childComponent.update();
   }
 
 }

@@ -1,0 +1,15 @@
+<div  class="services">
+        <div class="contenedor-formulario" >
+            <div class="banner-cabecera">
+                <h3>Demanar pressupost</h3>
+            </div>
+            <p>blablaasfasdfs</p>
+
+        </div>
+</div>
+{{pages()}}
+{{languages()}}
+{{panelExtraPrice()}}
+@for (servicio of serviciosContratados(); track servicio.id) {
+    {{servicio.title}}
+}
