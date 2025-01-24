@@ -3,7 +3,67 @@
             <div class="banner-cabecera">
                 <h3>Demanar pressupost</h3>
             </div>
-            <p>blablaasfasdfs</p>
+            <form [formGroup]="budgetSaveForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label htmlFor="inputNombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="inputNombre" formControlName="nombre" (input)="{'is-invalid': budgetSaveForm.get('nombre')?.invalid && budgetSaveForm.get('nombre')?.touched}" />
+                    @if(budgetSaveForm.get('nombre')?.invalid && budgetSaveForm.get('nombre')?.touched) {
+                    <div class="text-danger">
+                        @if(budgetSaveForm.get('nombre')?.errors?.['required']) {
+                        El Nombre es Obligatorio
+                        }
+                        @if(budgetSaveForm.get('nombre')?.errors?.['minlength']) {
+                        Debe de tener mínimo 3 caracteres.
+                        }
+                        @if(budgetSaveForm.get('nombre')?.errors?.['maxlength']) {
+                        Debe de tener máximo 3 caracteres.
+                        }
+                        @if(budgetSaveForm.get('nombre')?.errors?.['pattern']) {
+                        Solo permite letras.
+                        }
+                    </div>
+                    <!-- <pre>{{ budgetSaveForm.get('nombre')?.errors | json }}</pre> -->
+                    }
+        
+                </div>
+
+                <div class="mb-3">
+                    <label htmlFor="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" formControlName="email" (input)="{'is-invalid': budgetSaveForm.get('email')?.invalid && budgetSaveForm.get('email')?.touched}" />
+                    @if(budgetSaveForm.get('email')?.invalid && budgetSaveForm.get('email')?.touched) {
+                    <div class="text-danger">
+                        @if(budgetSaveForm.get('email')?.errors?.['required']) {
+                        El Email es Obligatorio
+                        }
+                        @if(budgetSaveForm.get('email')?.errors?.['email']) {
+                        Debes introducir un Email
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label htmlFor="inputTelefono" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono" (input)="{'is-invalid': budgetSaveForm.get('telefono')?.invalid && budgetSaveForm.get('telefono')?.touched}" />
+                    @if(budgetSaveForm.get('telefono')?.invalid && budgetSaveForm.get('telefono')?.touched) {
+                    <div class="text-danger">
+                        @if(budgetSaveForm.get('telefono')?.errors?.['required']) {
+                        El Teléfono es Obligatorio
+                        }
+                        @if(budgetSaveForm.get('telefono')?.errors?.['minlength']) {
+                        Debe tener mínimo {{ budgetSaveForm.get('telefono')?.errors?.['minlength']?.requiredLength }} caracteres. Actualmente tiene {{ budgetSaveForm.get('telefono')?.errors?.['minlength']?.actualLength }} caracteres.
+                        }
+                        @if(budgetSaveForm.get('telefono')?.errors?.['maxlength']) {
+                        Debe tener máximo {{ budgetSaveForm.get('telefono')?.errors?.['maxlength']?.requiredLength }} caracteres. Actualmente tiene {{ budgetSaveForm.get('telefono')?.errors?.['maxlength']?.actualLength }} caracteres.
+                        }
+                        @if(budgetSaveForm.get('telefono')?.errors?.['pattern']) {
+                        Solo permite numeros.
+                        }
+                    </div>
+                    <pre>{{ budgetSaveForm.get('telefono')?.errors}}</pre>
+                    }
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
 
         </div>
 </div>
@@ -13,3 +73,5 @@
 @for (servicio of serviciosContratados(); track servicio.id) {
     {{servicio.title}}
 }
+
+

@@ -1,0 +1,16 @@
+<div id="listado">
+    @for (budgetSaved of budgetsSavedList(); track budgetSaved.id_budgetSaved) {
+        <div class="contenedor" >
+            <div>{{budgetSaved.nombre}}</div>
+            <div>{{budgetSaved.email}}</div>
+            <div>{{budgetSaved.telefono}}</div>
+            @for (servicios of budgetSaved.servicios; track servicios) {
+                <div>{{servicios.title}} @if(servicios.title === "Web") {(Nombre de pàgines: {{budgetSaved.pages}}, llenguatges: {{budgetSaved.languages}})}
+                </div>
+            }
+            <div>{{budgetSaved.total}}</div>
+            <div>{{budgetSaved.created_at}}</div>
+            <div>{{budgetSaved.updated_at}}</div>
+        </div>
+    }
+</div>
