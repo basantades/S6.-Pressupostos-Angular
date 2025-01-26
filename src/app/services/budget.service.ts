@@ -50,19 +50,19 @@ export class BudgetService {
       servicios: [
         { id: 1, title: "SEO", descripcion: "Optimització per a motors de cerca per millorar la visibilitat en línia.", price: 300 },
         { id: 2, title: "Ads", descripcion: "Creació i gestió de campanyes publicitàries per a augmentar el trànsit i les conversions.", price: 400 }],      
-      total: 500,
+      total: 700,
       created_at: new Date(),
       updated_at: new Date()
     },
     {
       id_budgetSaved: 2,
-      nombre: "Jordi",
-      email: "jordi@jordi",
+      nombre: "Carlos Costa",
+      email: "carlos@costa",
       servicios: [
         { id: 3, title: "Web", descripcion: "Programació d'una web responsive completa.", price: 500 }],      
-      pages: 1,
-      languages: 1,
-      total: 500,
+      pages: 5,
+      languages: 3,
+      total: 920,
       created_at: new Date(),
       updated_at: new Date()
     }
@@ -76,6 +76,32 @@ addBudget(budget: BudgetSaved) {
   const currentBudgets = this.budgetsSavedList();
   this.budgetsSavedList.set([...currentBudgets, budget]);
 }
+orderBy = signal<'fecha' | 'nombre' | 'total'>('fecha'); // Criterio de orden inicial
+
+getSortedBudgets(): BudgetSaved[] {
+  const order = this.orderBy(); // Obtener el criterio de orden
+  return this.budgetsSavedList()
+    .slice()
+    .sort((a, b) => {
+      if (order === 'fecha') {
+        // Ordenar por fecha (más reciente a más antigua)
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      } else if (order === 'nombre') {
+        // Ordenar por nombre (alfabético)
+        return a.nombre.localeCompare(b.nombre);
+      } else if (order === 'total') {
+        // Ordenar por total (de mayor a menor)
+        return b.total - a.total;
+      }
+
+      return 0;
+    });
+}
+
+setOrderBy(order: 'fecha' | 'nombre' | 'total') {
+  this.orderBy.set(order); // Cambiar el criterio de orden
+}
 
   constructor() { }
 }
+

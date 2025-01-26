@@ -30,9 +30,9 @@ budgetSaveForm: FormGroup;
 
 constructor(private fb: FormBuilder) {
 this.budgetSaveForm = this.fb.group({
-  nombre: ['Ismael', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern('^[a-zA-Z ]*$')]],
-  email: ['ismae@ismael.com', [Validators.required, Validators.email]],
-  telefono: ['685457489', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(9), Validators.maxLength(15)]],
+  nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern('^[a-zA-Z ]*$')]],
+  email: ['', [Validators.required, Validators.email]],
+  telefono: ['', [Validators.pattern('^[0-9]*$'), Validators.minLength(9), Validators.maxLength(15)]],
 });
 }
 

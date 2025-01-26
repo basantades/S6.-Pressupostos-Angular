@@ -1,8 +1,14 @@
+
+
 $nuevo-principal: #0f927c;
+$nuevo-danger: #ff5555;
 
 $theme-colors: (
-  "primary": $nuevo-principal
+  "primary": $nuevo-principal,
+  "danger": $nuevo-danger
 );
+
+
 
 @import  "../node_modules/bootstrap/scss/bootstrap.scss";
 

@@ -3,10 +3,12 @@
             <div class="banner-cabecera">
                 <h3>Demanar pressupost</h3>
             </div>
+            <div class="p-4">
             <form [formGroup]="budgetSaveForm" (ngSubmit)="onSubmit()">
-                <div class="mb-3">
-                    <label htmlFor="inputNombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="inputNombre" formControlName="nombre" (input)="{'is-invalid': budgetSaveForm.get('nombre')?.invalid && budgetSaveForm.get('nombre')?.touched}" />
+                <div class="campos-container">
+                <div class="campo">
+                    <!-- <label htmlFor="inputNombre" class="form-label">Nombre</label> -->
+                    <input type="text" class="form-control rounded-pill" id="inputNombre" formControlName="nombre" placeholder="Nom*" (input)="{'is-invalid': budgetSaveForm.get('nombre')?.invalid && budgetSaveForm.get('nombre')?.touched}" />
                     @if(budgetSaveForm.get('nombre')?.invalid && budgetSaveForm.get('nombre')?.touched) {
                     <div class="text-danger">
                         @if(budgetSaveForm.get('nombre')?.errors?.['required']) {
@@ -16,20 +18,19 @@
                         Debe de tener mínimo 3 caracteres.
                         }
                         @if(budgetSaveForm.get('nombre')?.errors?.['maxlength']) {
-                        Debe de tener máximo 3 caracteres.
+                        Debe de tener máximo 30 caracteres.
                         }
                         @if(budgetSaveForm.get('nombre')?.errors?.['pattern']) {
                         Solo permite letras.
                         }
                     </div>
-                    <!-- <pre>{{ budgetSaveForm.get('nombre')?.errors | json }}</pre> -->
                     }
         
                 </div>
 
-                <div class="mb-3">
-                    <label htmlFor="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" formControlName="email" (input)="{'is-invalid': budgetSaveForm.get('email')?.invalid && budgetSaveForm.get('email')?.touched}" />
+                <div class="campo">
+                    <!-- <label htmlFor="inputEmail" class="form-label">Email</label> -->
+                    <input type="email" class="form-control rounded-pill" id="inputEmail" formControlName="email" placeholder="Email*" (input)="{'is-invalid': budgetSaveForm.get('email')?.invalid && budgetSaveForm.get('email')?.touched}" />
                     @if(budgetSaveForm.get('email')?.invalid && budgetSaveForm.get('email')?.touched) {
                     <div class="text-danger">
                         @if(budgetSaveForm.get('email')?.errors?.['required']) {
@@ -41,14 +42,11 @@
                     </div>
                     }
                 </div>
-                <div class="mb-3">
-                    <label htmlFor="inputTelefono" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="inputTelefono" formControlName="telefono" (input)="{'is-invalid': budgetSaveForm.get('telefono')?.invalid && budgetSaveForm.get('telefono')?.touched}" />
+                <div class="campo">
+                    <!-- <label htmlFor="inputTelefono" class="form-label">Teléfono</label> -->
+                    <input type="tel" class="form-control rounded-pill" id="inputTelefono" formControlName="telefono" placeholder="Telèfon" (input)="{'is-invalid': budgetSaveForm.get('telefono')?.invalid && budgetSaveForm.get('telefono')?.touched}" />
                     @if(budgetSaveForm.get('telefono')?.invalid && budgetSaveForm.get('telefono')?.touched) {
                     <div class="text-danger">
-                        @if(budgetSaveForm.get('telefono')?.errors?.['required']) {
-                        El Teléfono es Obligatorio
-                        }
                         @if(budgetSaveForm.get('telefono')?.errors?.['minlength']) {
                         Debe tener mínimo {{ budgetSaveForm.get('telefono')?.errors?.['minlength']?.requiredLength }} caracteres. Actualmente tiene {{ budgetSaveForm.get('telefono')?.errors?.['minlength']?.actualLength }} caracteres.
                         }
@@ -59,19 +57,14 @@
                         Solo permite numeros.
                         }
                     </div>
-                    <pre>{{ budgetSaveForm.get('telefono')?.errors}}</pre>
                     }
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+                <button type="submit" class="btn btn-primary rounded-pill px-4 text-white ">Solicitar pressupost</button>
             </form>
-
+        </div>
         </div>
 </div>
-{{pages()}}
-{{languages()}}
-{{panelExtraPrice()}}
-@for (servicio of serviciosContratados(); track servicio.id) {
-    {{servicio.title}}
-}
+
 
 

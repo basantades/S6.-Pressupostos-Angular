@@ -10,5 +10,8 @@ import { BudgetService } from '../../services/budget.service';
 })
 export class BudgetsListComponent {
 budgetsSavedList = inject(BudgetService).getBudgetsSavedList();
+getSortedBudgets = inject(BudgetService).getSortedBudgets;
+orderBy = inject(BudgetService).orderBy;
+setOrderBy = inject(BudgetService).setOrderBy;
 
 }
