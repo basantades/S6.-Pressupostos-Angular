@@ -1,0 +1,61 @@
+input::placeholder {
+    font-size: 14px;
+    color: #9b9b9b;
+  }
+
+  .datos-user {
+    width: 30%;
+  }
+  .datos-serveis {
+    text-align: left;
+    width: 40%;
+  }
+  .datos-preu {
+    text-align: center;
+    width: 20%;
+  }
+  .ordenar button {
+      text-decoration: none;
+      color: #868686;
+  }
+
+  .ordenar button.active {
+    color: #2b2b2b;
+    font-weight: bold;
+}
+
+  .ordenar button:hover {
+    color: #0f927c;
+}
+
+  @media screen and (max-width: 900px) {
+    .datos-user {
+      width: 100%;
+    }
+    .datos-serveis {
+        text-align: left;
+        width: 50%;
+      }
+      .datos-preu {
+        text-align: center;
+        width: 25%;
+        
+      }
+    
+  }
+  @media screen and (max-width: 450px) {
+
+    .datos-serveis {
+      width: 100%;
+    }
+    .datos-preu {
+      width: 100%;
+    }
+    
+  }
+
+  .service {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
