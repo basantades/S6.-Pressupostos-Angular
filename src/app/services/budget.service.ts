@@ -76,12 +76,29 @@ addBudget(budget: BudgetSaved) {
   const currentBudgets = this.budgetsSavedList();
   this.budgetsSavedList.set([...currentBudgets, budget]);
 }
+
+searchQuery = signal<string>(''); 
 orderBy = signal<'fecha' | 'nombre' | 'total'>('fecha'); // Criterio de orden inicial
+
+
+setOrderBy(order: 'fecha' | 'nombre' | 'total') {
+  this.orderBy.set(order); // Cambiar el criterio de orden
+}
+
+searchBudgets(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const newValue = input.value;
+    this.searchQuery.update(value => newValue || "");
+    console.log(this.searchQuery())
+}
 
 getSortedBudgets(): BudgetSaved[] {
   const order = this.orderBy(); // Obtener el criterio de orden
+  const query = this.searchQuery();
+
   return this.budgetsSavedList()
     .slice()
+    .filter(budget => budget.nombre.toLowerCase().includes(query.toLocaleLowerCase())) //filtrar por busqueda
     .sort((a, b) => {
       if (order === 'fecha') {
         // Ordenar por fecha (más reciente a más antigua)
@@ -96,10 +113,6 @@ getSortedBudgets(): BudgetSaved[] {
 
       return 0;
     });
-}
-
-setOrderBy(order: 'fecha' | 'nombre' | 'total') {
-  this.orderBy.set(order); // Cambiar el criterio de orden
 }
 
   constructor() { }

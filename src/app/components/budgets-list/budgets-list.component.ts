@@ -13,5 +13,7 @@ budgetsSavedList = inject(BudgetService).getBudgetsSavedList();
 getSortedBudgets = inject(BudgetService).getSortedBudgets;
 orderBy = inject(BudgetService).orderBy;
 setOrderBy = inject(BudgetService).setOrderBy;
+searchBudgets = inject(BudgetService).searchBudgets;
+searchQuery = inject(BudgetService).searchQuery;
 
 }
