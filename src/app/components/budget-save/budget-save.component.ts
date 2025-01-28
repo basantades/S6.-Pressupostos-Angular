@@ -40,8 +40,10 @@ this.budgetSaveForm = this.fb.group({
 onSubmit() {
   if (this.budgetSaveForm.invalid) {
     this.budgetSaveForm.markAllAsTouched();
+    console.log(this.budgetSaveForm)
     return;
   }
+  
 
   // Crea un nuevo objeto con los datos del formulario y servicios contratados
   const nuevoPresupuesto: BudgetSaved = {
@@ -58,11 +60,21 @@ onSubmit() {
 // Añade el nuevo presupuesto usando el servicio
 this.budgetService.addBudget(nuevoPresupuesto);
 
-
-
-  // Limpia el formulario después de enviarlo
+// Limpia el formulario después de enviarlo
   this.budgetSaveForm.reset();
+
+  this.showConfirmationModal()
 }
+
+  // Mostrar el modal
+  showConfirmationModal() {
+    const modalElement = document.getElementById('confirmationModal');
+    if (modalElement) {
+      // Usar la clase Modal de Bootstrap
+      const modalInstance = new (window as any).bootstrap.Modal(modalElement);
+      modalInstance.show();
+    }
+  }
 
 calcularTotal(): number {
   this.precioServicios = this.serviciosContratados().reduce((total, budget) => total + budget.price, 0);
