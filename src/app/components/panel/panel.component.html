@@ -3,9 +3,11 @@
     <label for="pages" class="d-inline-flex align-items-center gap-2"><i class="bi bi-info-circle text-primary fs-5" data-bs-toggle="modal" data-bs-target="#modalPages" 
       data-bs-auto-close="outside" type="button"></i> Nombre de pàgines</label>
     <div class="group">
-      <button class="boton" id="boton-decrementar-pages" (click)="decrement('pages')" disabled><i class="bi bi-dash-lg"></i></button>
-      <input type="number" id="pages" formControlName="countPages" min="1" (input)="checkPages()">
-      <button class="boton" (click)="increment('pages')"><i class="bi bi-plus-lg"></i></button>
+      <button  class="boton" id="boton-decrementar-pages"
+      (click)="modifyValue('pages', 'decrement')"
+      [disabled]="panelForm.get('countPages')?.value === 1"><i class="bi bi-dash-lg"></i></button>
+      <input type="number" id="pages" formControlName="countPages" min="1" (input)="update()" [value]="pages()">
+      <button class="boton" (click)="modifyValue('pages', 'increment')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>
   
@@ -13,14 +15,14 @@
     <label for="languages" class="d-inline-flex align-items-center gap-2"><i class="bi bi-info-circle text-primary fs-5" data-bs-toggle="modal" data-bs-target="#modalLanguages" 
       data-bs-auto-close="outside" type="button"></i> Nombre de llenguatges</label>
     <div class="group">
-      <button class="boton" id="boton-decrementar-languages" (click)="decrement('languages')" disabled><i class="bi bi-dash-lg"></i></button>
-      <input type="number" id="languages" formControlName="countLanguages" min="1" (input)="checkLanguages()"> 
-      <button class="boton" (click)="increment('languages')"><i class="bi bi-plus-lg"></i></button>
+      <button class="boton" id="boton-decrementar-languages"
+      (click)="modifyValue('languages', 'decrement')"
+      [disabled]="panelForm.get('countLanguages')?.value === 1"><i class="bi bi-dash-lg"></i></button>
+      <input type="number" id="languages" formControlName="countLanguages" min="1" (input)="update()"  [value]="languages()"> 
+      <button class="boton" (click)="modifyValue('languages', 'increment')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>
 </form>
-  <!-- <div>paginas: {{this.panelForm.get('countPages')?.value || 1}}, llenguatges: {{this.panelForm.get('countLanguages')?.value || 1}}, Precio extra: {{panelExtraPrice()}}</div> -->
-
   
   <!-- Modals -->
   <div class="modal fade" id="modalPages" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

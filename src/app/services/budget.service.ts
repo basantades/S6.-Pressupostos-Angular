@@ -1,4 +1,4 @@
-import { Injectable, signal, Signal } from '@angular/core';
+import { Injectable, signal, Signal, effect  } from '@angular/core';
 import { Budget } from '../interfaces/budget';
 import { BudgetSaved } from '../interfaces/budget-saved';
 
@@ -8,11 +8,37 @@ import { BudgetSaved } from '../interfaces/budget-saved';
 })
 export class BudgetService {
 
+  seo = signal<boolean>(false);
+  ads = signal<boolean>(false);
+  web = signal<boolean>(false);
   pages = signal<number>(1);
   languages = signal<number>(1);
   panelExtraPrice = signal<number>(0);
+  totalPrice = signal<number>(0);
   serviciosContratados = signal<Budget[]>([]);
 
+  constructor() {
+    console.log(this.seo());
+    console.log(this.ads());
+    console.log(this.web());
+    // Effect para observar cambios en serviciosContratados
+    effect(() => {
+      const currentServices = this.serviciosContratados();
+
+      console.log(this.seo());
+      console.log(this.ads());
+      console.log(this.web());
+      console.log(currentServices);
+    });
+}
+
+  setPages(value: number): void {
+    this.pages.set(value); // Actualizar el valor del signal
+  }
+
+  setLanguages(value: number): void {
+    this.languages.set(value); // Actualizar el valor del signal
+  }
 
   budgets: Budget[] = [
     { 
@@ -115,6 +141,6 @@ getSortedBudgets(): BudgetSaved[] {
     });
 }
 
-  constructor() { }
+
 }
 

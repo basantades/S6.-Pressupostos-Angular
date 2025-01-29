@@ -12,89 +12,68 @@ import { BudgetService } from '../../services/budget.service';
 export class PanelComponent {
 
   panelForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.panelForm = this.fb.group({
-      countPages: [1],
-      countLanguages: [1]
-    });
-  }
-
-
   panelExtraPrice = inject(BudgetService).panelExtraPrice;
   pages = inject(BudgetService).pages;
   languages = inject(BudgetService).languages;
 
+  constructor(private fb: FormBuilder) {
+    this.panelForm = this.fb.group({
+      countPages: [this.pages()],
+      countLanguages: [this.languages()]
+    });
 
+    this.panelForm.valueChanges.subscribe(() => {
+      this.validateAndSyncInput('countPages');
+      this.validateAndSyncInput('countLanguages');
+      this.update();
+    });
 
-  checkPages() {
-    const currentValue = this.panelForm.get('countPages')?.value || 1;
+    // Sincronizar señales con valores iniciales
+    effect(() => {
+      this.panelForm.patchValue({
+        countPages: this.pages(),
+        countLanguages: this.languages(),
+      });
+    });
+  }
+
+  // Validar valor y sincronizar el input si es inválido
+  validateAndSyncInput(controlName: string) {
+    const control = this.panelForm.get(controlName);
+    const currentValue = control?.value || 1;
+
     if (isNaN(currentValue) || currentValue < 1) {
-      this.panelForm.get('countPages')?.setValue(1);
-    }
-    this.update()
-  }
-
-  checkLanguages() {
-    const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-    if (isNaN(currentValue) || currentValue < 1) {
-      this.panelForm.get('countLanguages')?.setValue(1);
-    }
-    this.update()
-  }
-
-  increment(type: string) {
-    if (type === 'pages') {
-      const currentValue = this.panelForm.get('countPages')?.value || 1;
-    this.panelForm.get('countPages')?.setValue(currentValue + 1);
-    this.checkPages()
-    } else if (type === 'languages') {  
-      const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-    this.panelForm.get('countLanguages')?.setValue(currentValue + 1);
-    this.checkLanguages()
+      control?.setValue(1, { emitEvent: false }); // Cambiar el valor del formulario
     }
   }
 
-  decrement(type: string) {  
-    if (type === 'pages') {
-      const currentValue = this.panelForm.get('countPages')?.value || 1;
-    this.panelForm.get('countPages')?.setValue(currentValue - 1);
-    this.checkPages()
-    } else if (type === 'languages') {  
-      const currentValue = this.panelForm.get('countLanguages')?.value || 1;
-    this.panelForm.get('countLanguages')?.setValue(currentValue - 1);
-    this.checkLanguages()
-    }
+ 
+  modifyValue(type: 'pages' | 'languages', action: 'increment' | 'decrement') {
+    const controlName = type === 'pages' ? 'countPages' : 'countLanguages';
+    const currentValue = this.panelForm.get(controlName)?.value || 1;
+
+    const newValue =
+      action === 'increment'
+        ? currentValue + 1
+        : Math.max(1, currentValue - 1); // Evitar valores menores que 1
+
+    this.panelForm.get(controlName)?.setValue(newValue);
   }
 
-  disabledButton() {
-      const botondecrementar = document.querySelector('#boton-decrementar-pages');
-      if (botondecrementar) { 
-        if (this.panelForm.get('countPages')?.value === 1) {
-          botondecrementar.setAttribute('disabled', 'true');
-        } else {
-          botondecrementar.removeAttribute('disabled');
-        }
-      }
-        const botondecrementarLanguages = document.querySelector('#boton-decrementar-languages');
-        if (botondecrementarLanguages) { 
-          if (this.panelForm.get('countLanguages')?.value === 1) {
-            botondecrementarLanguages.setAttribute('disabled', 'true');
-          } else {
-            botondecrementarLanguages.removeAttribute('disabled');
-          }
-        }
-  }
-
+  // Función de actualización
   update() {
-    this.pages.update(value => this.panelForm.get('countPages')?.value || 1);
-    this.languages.update(value => this.panelForm.get('countLanguages')?.value || 1);
-    this.panelExtraPrice.update(value => (this.panelForm.get('countPages')?.value || 1) * (this.panelForm.get('countLanguages')?.value || 1) * 30 - 30);
-    this.disabledButton();
+    const pagesValue = this.panelForm.get('countPages')?.value || 1;
+    const languagesValue = this.panelForm.get('countLanguages')?.value || 1;
+
+    this.pages.set(pagesValue);
+    this.languages.set(languagesValue);
+    this.panelExtraPrice.set(pagesValue * languagesValue * 30 - 30);
   }
 
+  // Resetear formulario
   resetForm(): void {
     this.panelForm.reset({ countPages: 1, countLanguages: 1 });
+    this.update();
   }
 
 }

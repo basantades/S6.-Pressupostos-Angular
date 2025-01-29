@@ -7,21 +7,33 @@
                 <h3>{{budget.title}}</h3>
                 <p>{{budget.descripcion}}</p>
             </div>
-            <div class="price">{{budget.price}} €</div>
+            @if (budget.id === 3 && web()) {
+                <div class="price">{{budget.price + panelExtraPrice()}} €</div>
+            } @else {
+                <div class="price">{{budget.price}} €</div>
+            }
             <label>
-                <input type="checkbox" id="checkbox-{{budget.id}}" (change)="onCheckboxChange($event, budget.price, budget.id)"> Afegir
-            </label>
+                <input
+                  type="checkbox"
+                  id="checkbox-{{budget.id}}"
+                  [checked]="(budget.id === 1 && seo()) || (budget.id === 2 && ads()) || (budget.id === 3 && web())"
+                  (change)="onCheckboxChange(budget, $event)"
+                  /> Afegir
+              </label>
             </div>
             @if (budget.additionalOptions) {
-            <div class="ocultar" id="options-{{budget.id}}">
-                <app-panel></app-panel>
-            </div>
+                    <div  id="options-{{budget.id}}"
+                    [class.ocultar]="!(budget.id === 3 && web())"
+                    >
+                        <app-panel></app-panel>
+                    </div>
             }
         </div>
     }
-
 </div>
 
+
 <section class="total">
-    <h4>Preu pressupostat:</h4><h4 class="price"><span>{{totalPrice}}</span> €</h4>
-</section>
+    <h4>Preu pressupostat:</h4>
+    <h4 class="price"><span>{{ totalPrice() }}</span> €</h4>
+  </section>

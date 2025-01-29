@@ -19,8 +19,7 @@ pages = inject(BudgetService).pages;
 languages = inject(BudgetService).languages;
 panelExtraPrice = inject(BudgetService).panelExtraPrice
 serviciosContratados = inject(BudgetService).serviciosContratados
-precioServicios: number = 0;
-
+totalPrice = inject(BudgetService).totalPrice
 
 budgetsSavedList = inject(BudgetService).getBudgetsSavedList();
 
@@ -51,7 +50,7 @@ onSubmit() {
     servicios: this.serviciosContratados(),
     pages: this.pages(),
     languages: this.languages(),
-    total: this.calcularTotal(),
+    total: this.totalPrice(),
     created_at: new Date(),
     updated_at: new Date(),
   };
@@ -75,11 +74,5 @@ this.budgetService.addBudget(nuevoPresupuesto);
       modalInstance.show();
     }
   }
-
-calcularTotal(): number {
-  this.precioServicios = this.serviciosContratados().reduce((total, budget) => total + budget.price, 0);
-
-  return this.precioServicios;
-}
 
 }
