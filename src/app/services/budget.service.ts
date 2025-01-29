@@ -1,6 +1,7 @@
 import { Injectable, signal, Signal, effect  } from '@angular/core';
 import { Budget } from '../interfaces/budget';
 import { BudgetSaved } from '../interfaces/budget-saved';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Injectable({
@@ -18,19 +19,28 @@ export class BudgetService {
   serviciosContratados = signal<Budget[]>([]);
 
   constructor() {
-    console.log(this.seo());
-    console.log(this.ads());
-    console.log(this.web());
-    // Effect para observar cambios en serviciosContratados
-    effect(() => {
-      const currentServices = this.serviciosContratados();
-
-      console.log(this.seo());
-      console.log(this.ads());
-      console.log(this.web());
-      console.log(currentServices);
+    effect(() => { // si inicias con url con seao, ads o web activados se añaden a servicciosContratdos
+      const servicios: Budget[] = [];
+      if (this.seo()) {
+        servicios.push(this.budgets.find(b => b.title === 'SEO')!);
+      }
+      if (this.ads()) {
+        servicios.push(this.budgets.find(b => b.title === 'Ads')!);
+      }
+      if (this.web()) {
+        servicios.push(this.budgets.find(b => b.title === 'Web')!);
+      }
+      this.serviciosContratados.set(servicios);
     });
-}
+  }
+
+  resetValues() {
+    this.seo.set(false);
+    this.ads.set(false);
+    this.web.set(false);
+    this.pages.set(1);
+    this.languages.set(1);
+  }
 
   setPages(value: number): void {
     this.pages.set(value); // Actualizar el valor del signal
@@ -140,6 +150,9 @@ getSortedBudgets(): BudgetSaved[] {
       return 0;
     });
 }
+
+
+
 
 
 }

@@ -61,7 +61,7 @@ this.budgetService.addBudget(nuevoPresupuesto);
 
 // Limpia el formulario después de enviarlo
   this.budgetSaveForm.reset();
-
+  this.budgetService.resetValues();
   this.showConfirmationModal()
 }
 

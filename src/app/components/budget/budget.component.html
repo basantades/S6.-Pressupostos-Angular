@@ -16,7 +16,7 @@
                 <input
                   type="checkbox"
                   id="checkbox-{{budget.id}}"
-                  [checked]="(budget.id === 1 && seo()) || (budget.id === 2 && ads()) || (budget.id === 3 && web())"
+                  [checked]="budget.id === 1 ? seo() : budget.id === 2 ? ads() : budget.id === 3 ? web() : false"
                   (change)="onCheckboxChange(budget, $event)"
                   /> Afegir
               </label>
