@@ -1,7 +1,6 @@
-@use '../../../styles.scss';
-
 .banner-cabecera {
-    @extend .rounded-top-4;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     padding: 10px 26px;
     background-color: #0f927c;
     background: linear-gradient(300deg, #5fb0db 0%, #0f927c 60%, #86e9a4 100%);

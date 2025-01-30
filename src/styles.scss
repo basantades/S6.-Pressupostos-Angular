@@ -23,6 +23,9 @@ body {
   // @extend .bg-primary;
 }
 
+header h4 {
+  @extend .text-primary;
+}
 
 
 .services {
@@ -101,4 +104,25 @@ h3 {
 
 .alto-completo {
 min-height: 50vh;
+}
+
+
+
+.boton-check {
+  @extend .btn, .btn-outline-primary, .rounded-pill, .fw-bold;
+  width: 115px;
+}
+@media screen and (max-width: 768px) {
+  .boton-check {
+      width: 100%;
+  }
+  
+}
+
+.boton-check:hover {
+  @extend .btn-primary, .text-white;
+}
+
+.btn-check:checked + .btn {
+  @extend .btn-primary, .text-white;
 }

@@ -1,11 +1,8 @@
-@import '../../../styles.scss';
 
 header {
     margin: 20px 0;
 }
-h4 {
-    @extend .text-primary;
-}
+
 @media (max-width: 1200px) {
     h4 {
         padding: 0 20px;
