@@ -77,7 +77,7 @@ export class BudgetService {
   }
 
 
-  private budgetsSavedList = signal<BudgetSaved[]>([
+  private budgetsSavedList = signal<BudgetSaved[]>([ //listado inicial de ejemplo
     {
       id_budgetSaved: 1,
       nombre: "Jordi",
@@ -99,8 +99,8 @@ export class BudgetService {
       pages: 5,
       languages: 3,
       total: 920,
-      created_at: new Date(),
-      updated_at: new Date()
+      created_at: new Date('2024-01-28T16:00:00+01:00'),
+      updated_at: new Date('2024-01-28T16:00:00+01:00')
     }
   ]);
 
@@ -115,9 +115,13 @@ addBudget(budget: BudgetSaved) {
 
 searchQuery = signal<string>(''); 
 orderBy = signal<'fecha' | 'nombre' | 'total'>('fecha'); // Criterio de orden inicial
+invertido = signal<boolean>(false);
 
 
 setOrderBy(order: 'fecha' | 'nombre' | 'total') {
+  if (order === this.orderBy()) {
+    this.invertido.set(!this.invertido()); // Invertir el estado de inversión
+  }
   this.orderBy.set(order); // Cambiar el criterio de orden
 }
 
@@ -131,28 +135,25 @@ searchBudgets(event: Event) {
 getSortedBudgets(): BudgetSaved[] {
   const order = this.orderBy(); // Obtener el criterio de orden
   const query = this.searchQuery();
+  const isInverted = this.invertido(); // Leer el estado de inversión
 
   return this.budgetsSavedList()
     .slice()
-    .filter(budget => budget.nombre.toLowerCase().includes(query.toLocaleLowerCase())) //filtrar por busqueda
+    .filter(budget => budget.nombre.toLowerCase().includes(query.toLocaleLowerCase())) // Filtrar por búsqueda
     .sort((a, b) => {
+      let result = 0;
+
       if (order === 'fecha') {
-        // Ordenar por fecha (más reciente a más antigua)
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        result = new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
       } else if (order === 'nombre') {
-        // Ordenar por nombre (alfabético)
-        return a.nombre.localeCompare(b.nombre);
+        result = a.nombre.localeCompare(b.nombre);
       } else if (order === 'total') {
-        // Ordenar por total (de mayor a menor)
-        return b.total - a.total;
+        result = b.total - a.total;
       }
 
-      return 0;
+      return isInverted ? result * -1 : result; // Invertir el orden si es necesario
     });
 }
-
-
-
 
 
 }

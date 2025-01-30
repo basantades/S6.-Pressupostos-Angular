@@ -9,9 +9,18 @@
         </div>
           <div class="d-flex align-items-center ms-3 ordenar">
             <p class="m-2">Ordre per:</p>
-            <button class="btn btn-link ps-2" [class.active]="orderBy() === 'fecha'" (click)="setOrderBy('fecha')">Data</button>
-            <button class="btn btn-link ps-2" [class.active]="orderBy() === 'total'" (click)="setOrderBy('total')">Import</button>
-            <button class="btn btn-link ps-2" [class.active]="orderBy() === 'nombre'"  (click)="setOrderBy('nombre')">Nom</button>
+            <button class="btn btn-link fw-bold ps-2" [class.active]="orderBy() === 'fecha'" (click)="setOrderBy('fecha')">Data 
+                @if (orderBy() === 'fecha') {
+                @if(invertido() === false) {<i class="bi bi-caret-down-fill"></i>} @else {<i class="bi bi-caret-up-fill"></i>}
+                }</button>
+            <button class="btn btn-link fw-bold ps-2" [class.active]="orderBy() === 'total'" (click)="setOrderBy('total')">Import 
+                @if (orderBy() === 'total') {
+                @if(invertido() === false) {<i class="bi bi-caret-down-fill"></i>} @else {<i class="bi bi-caret-up-fill"></i>}
+                }</button>
+            <button class="btn btn-link fw-bold ps-2" [class.active]="orderBy() === 'nombre'"  (click)="setOrderBy('nombre')">Nom 
+                @if (orderBy() === 'nombre') {
+                @if(invertido() === false) {<i class="bi bi-caret-down-fill"></i>} @else {<i class="bi bi-caret-up-fill"></i>}
+                }</button>
           </div>
     </div>
 </div>
@@ -44,7 +53,7 @@
                 <div class="datos-preu">
                 <div>
                     <h5 class="">Preu:</h5>
-                    <p class="price">{{budgetSaved.total}} €</p>
+                    <p class="price fs-1">{{budgetSaved.total}} €</p>
                 </div>
                 </div>
             </div>

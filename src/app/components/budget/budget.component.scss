@@ -3,3 +3,22 @@
 .service h3 {
     @extend .text-primary, .fw-bolder, .mt-2;
 }
+
+.boton-check {
+    @extend .btn, .btn-outline-primary, .rounded-pill, .fw-bold;
+    width: 115px;
+}
+@media screen and (max-width: 768px) {
+    .boton-check {
+        width: 100%;
+    }
+    
+}
+
+.boton-check:hover {
+    @extend .btn-primary, .text-white;
+}
+
+.btn-check:checked + .btn {
+    @extend .btn-primary, .text-white;
+}
