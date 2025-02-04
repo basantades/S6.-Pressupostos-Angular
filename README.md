@@ -35,20 +35,28 @@ Este repositorio contiene una aplicación de **gestión de presupuestos** desarr
 
 ## 🛠️ Instalación
 
-**✔️ Paso 1:** Clona este repositorio en tu máquina local:
+### **✔️ Requisitos previos**
+Asegúrate de tener **Node.js** instalado en tu sistema. Puedes descargarlo desde [nodejs.org](https://nodejs.org/).  
+ℹ️ **No es necesario instalar Angular CLI globalmente**, ya que se instalará automáticamente con las dependencias del proyecto.
+
+### **✔️ Instalación paso a paso**
+
+**1️⃣ Clona este repositorio en tu máquina local:**
 ```bash
 git clone https://github.com/basantades/S6.-Pressupostos-Angular.git
 ```
 
-**✔️ Paso 2:** Ingresa al directorio del proyecto:
+**2️⃣ Ingresa al directorio del proyecto:**
 ```bash
 cd S6.-Pressupostos-Angular
 ```
 
-**✔️ Paso 3:** Instala las dependencias necesarias:
+**3️⃣ Instala las dependencias necesarias:**
 ```bash
 npm install
 ```
+
+Esto instalará todas las dependencias necesarias, incluyendo Angular CLI.
 
 ## ▶️ Ejecución
 

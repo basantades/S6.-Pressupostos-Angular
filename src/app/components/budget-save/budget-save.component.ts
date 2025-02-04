@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BudgetService } from '../../services/budget.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BudgetSaved, ApiResult } from '../../interfaces/budget-saved';
+import { BudgetSaved } from '../../interfaces/budget-saved';
 
 
 
@@ -15,13 +15,15 @@ export class BudgetSaveComponent {
 
 budgetService = inject(BudgetService);
 
-pages = inject(BudgetService).pages;
-languages = inject(BudgetService).languages;
-panelExtraPrice = inject(BudgetService).panelExtraPrice
-serviciosContratados = inject(BudgetService).serviciosContratados
-totalPrice = inject(BudgetService).totalPrice
 
-budgetsSavedList = inject(BudgetService).getBudgetsSavedList();
+pages = this.budgetService.pages;
+languages = this.budgetService.languages;
+panelExtraPrice = this.budgetService.panelExtraPrice;
+totalPrice = this.budgetService.totalPrice;
+serviciosContratados = this.budgetService.serviciosContratados;
+
+
+budgetsSavedList = this.budgetService.getBudgetsSavedList;
 
 
 budgetSaveForm: FormGroup;

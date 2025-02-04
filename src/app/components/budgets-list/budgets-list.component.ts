@@ -9,14 +9,15 @@ import { BudgetService } from '../../services/budget.service';
   styleUrl: './budgets-list.component.scss'
 })
 export class BudgetsListComponent {
-budgetsSavedList = inject(BudgetService).getBudgetsSavedList();
-getSortedBudgets = inject(BudgetService).getSortedBudgets;
-orderBy = inject(BudgetService).orderBy;
-setOrderBy = inject(BudgetService).setOrderBy;
-invertido = inject(BudgetService).invertido;
-searchBudgets = inject(BudgetService).searchBudgets;
-searchQuery = inject(BudgetService).searchQuery;
 
+budgetService = inject(BudgetService);
 
+budgetsSavedList = this.budgetService.getBudgetsSavedList();
+getSortedBudgets = this.budgetService.getSortedBudgets;
+orderBy = this.budgetService.orderBy;
+setOrderBy = this.budgetService.setOrderBy;
+invertido = this.budgetService.invertido;
+searchBudgets = this.budgetService.searchBudgets;
+searchQuery = this.budgetService.searchQuery;
 
 }

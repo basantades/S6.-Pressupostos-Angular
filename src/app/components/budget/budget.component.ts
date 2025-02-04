@@ -13,20 +13,20 @@ import { PanelComponent } from '../panel/panel.component';
 export class BudgetComponent {
 @Input() budgets: Budget[] = []
 
-BudgetService = inject(BudgetService);
+budgetService = inject(BudgetService);
 
 
-seo = inject(BudgetService).seo;
-ads = inject(BudgetService).ads;
-web = inject(BudgetService).web;
-pages = inject(BudgetService).pages;
-languages = inject(BudgetService).languages;
-panelExtraPrice = inject(BudgetService).panelExtraPrice;
-totalPrice = inject(BudgetService).totalPrice;
-serviciosContratados = inject(BudgetService).serviciosContratados
+seo = this.budgetService.seo;
+ads = this.budgetService.ads;
+web = this.budgetService.web;
+pages = this.budgetService.pages;
+languages = this.budgetService.languages;
+panelExtraPrice = this.budgetService.panelExtraPrice;
+totalPrice = this.budgetService.totalPrice;
+serviciosContratados = this.budgetService.serviciosContratados;
 
-constructor(private budgetService: BudgetService) {
-  this.budgets = this.BudgetService.getBudgets();
+constructor(private BudgetService: BudgetService) {
+  this.budgets = this.budgetService.getBudgets();
 
   // Efecto para calcular automáticamente el precio total al cambiar cualquier señal
   effect(() => {

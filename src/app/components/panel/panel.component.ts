@@ -12,9 +12,11 @@ import { BudgetService } from '../../services/budget.service';
 export class PanelComponent {
 
   panelForm: FormGroup;
-  panelExtraPrice = inject(BudgetService).panelExtraPrice;
-  pages = inject(BudgetService).pages;
-  languages = inject(BudgetService).languages;
+
+  budgetService = inject(BudgetService);
+  panelExtraPrice = this.budgetService.panelExtraPrice;
+  pages = this.budgetService.pages;
+  languages = this.budgetService.languages;
 
   constructor(private fb: FormBuilder) {
     this.panelForm = this.fb.group({
