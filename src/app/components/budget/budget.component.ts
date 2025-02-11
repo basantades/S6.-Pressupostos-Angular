@@ -1,4 +1,4 @@
-import { Component, Input, inject, effect, ViewChild} from '@angular/core';
+import { Component, inject, effect, ViewChild} from '@angular/core';
 import { Budget } from '../../interfaces/budget';
 import { BudgetService } from '../../services/budget.service';
 import { PanelComponent } from '../panel/panel.component';
@@ -11,7 +11,7 @@ import { PanelComponent } from '../panel/panel.component';
   styleUrl: './budget.component.scss'
 })
 export class BudgetComponent {
-@Input() budgets: Budget[] = []
+budgets: Budget[] = [];
 
 budgetService = inject(BudgetService);
 
@@ -25,7 +25,7 @@ panelExtraPrice = this.budgetService.panelExtraPrice;
 totalPrice = this.budgetService.totalPrice;
 serviciosContratados = this.budgetService.serviciosContratados;
 
-constructor(private BudgetService: BudgetService) {
+constructor() {
   this.budgets = this.budgetService.getBudgets();
 
   // Efecto para calcular automáticamente el precio total al cambiar cualquier señal

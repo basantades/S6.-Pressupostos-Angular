@@ -1,7 +1,11 @@
 <form [formGroup]="panelForm" class="animate-fade">
   <div class="opciones-container">
-    <label for="pages" class="d-inline-flex align-items-center gap-2"><i class="bi bi-info-circle text-primary fs-5" data-bs-toggle="modal" data-bs-target="#modalPages" 
-      data-bs-auto-close="outside" type="button"></i> Nombre de pàgines</label>
+    <label for="pages" class="d-inline-flex align-items-center gap-2">
+      <i class="bi bi-info-circle text-primary fs-5" 
+      (click)="openModal('pages')" 
+      data-bs-auto-close="outside" 
+      type="button"></i> 
+     Nombre de pàgines</label>
     <div class="group">
       <button  class="boton" id="boton-decrementar-pages"
       (click)="modifyValue('pages', 'decrement')"
@@ -12,8 +16,12 @@
   </div>
   
   <div class="opciones-container">
-    <label for="languages" class="d-inline-flex align-items-center gap-2"><i class="bi bi-info-circle text-primary fs-5" data-bs-toggle="modal" data-bs-target="#modalLanguages" 
-      data-bs-auto-close="outside" type="button"></i> Nombre de llenguatges</label>
+    <label for="languages" class="d-inline-flex align-items-center gap-2">
+      <i class="bi bi-info-circle text-primary fs-5" 
+      (click)="openModal('languages')" 
+      data-bs-auto-close="outside" 
+      type="button"></i> 
+      Nombre de llenguatges</label>
     <div class="group">
       <button class="boton" id="boton-decrementar-languages"
       (click)="modifyValue('languages', 'decrement')"
@@ -24,29 +32,10 @@
   </div>
 </form>
   
-  <!-- Modals -->
-  <div class="modal fade" id="modalPages" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-        <button type="button" class="btn-close m-3 ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="mx-3 mb-4 text-center">
-        <h4 class="mb-3">Nombre de pàgines</h4>
-        <p>Afegeix el nombre de pàgines que tindra el teu projecte. <br>
-        El preu extra per aquesta opció es de 30€ per pàgina.</p>
-        </div>
-			</div>
-		</div>
-	</div>
 
-  <div class="modal fade" id="modalLanguages" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-        <button type="button" class="btn-close m-3 ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="mx-3 mb-4 text-center">
-        <h4 class="mb-3">Nombre de llenguatges</h4>
-        <p>Afegeix el nombre de llenguatges que tindra el teu projecte. <br>
-        El preu extra per aquesta opció es de 30€ per llenguatge.</p>
-        </div>
-			</div>
-		</div>
-	</div>
+<app-modal 
+  #confirmationModal 
+  [title]="modalTitle()" 
+  [message]="modalMessage()" 
+  (close)="closeModal()">
+</app-modal>

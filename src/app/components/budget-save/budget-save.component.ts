@@ -1,13 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild  } from '@angular/core';
 import { BudgetService } from '../../services/budget.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BudgetSaved } from '../../interfaces/budget-saved';
-
+import { ModalComponent } from '../modal/modal.component';
 
 
 @Component({
   selector: 'app-budget-save',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ModalComponent],
   templateUrl: './budget-save.component.html',
   styleUrl: './budget-save.component.scss'
 })
@@ -27,6 +27,8 @@ budgetsSavedList = this.budgetService.getBudgetsSavedList;
 
 
 budgetSaveForm: FormGroup;
+
+@ViewChild('confirmationModal') confirmationModal!: ModalComponent;
 
 
 constructor(private fb: FormBuilder) {
@@ -64,17 +66,8 @@ this.budgetService.addBudget(nuevoPresupuesto);
 // Limpia el formulario después de enviarlo
   this.budgetSaveForm.reset();
   this.budgetService.resetValues();
-  this.showConfirmationModal()
+    
+  this.confirmationModal.show();
 }
-
-  // Mostrar el modal
-  showConfirmationModal() {
-    const modalElement = document.getElementById('confirmationModal');
-    if (modalElement) {
-      // Usar la clase Modal de Bootstrap
-      const modalInstance = new (window as any).bootstrap.Modal(modalElement);
-      modalInstance.show();
-    }
-  }
 
 }

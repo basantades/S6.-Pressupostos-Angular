@@ -1,11 +1,11 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { BudgetService } from '../../services/budget.service';
-
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-panel',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ModalComponent],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss'
 })
@@ -17,6 +17,11 @@ export class PanelComponent {
   panelExtraPrice = this.budgetService.panelExtraPrice;
   pages = this.budgetService.pages;
   languages = this.budgetService.languages;
+
+  @ViewChild('confirmationModal') confirmationModal: ModalComponent | undefined;
+  modalTitle = signal('');
+  modalMessage = signal('');
+
 
   constructor(private fb: FormBuilder) {
     this.panelForm = this.fb.group({
@@ -78,4 +83,27 @@ export class PanelComponent {
     this.update();
   }
 
+
+ // Abrir el modal con título y mensaje dinámico
+ openModal(type: string) {
+  if (type === 'pages') {
+    this.modalTitle.set('Nombre de pàgines');
+    this.modalMessage.set('Afegeix el nombre de pàgines que tindrà el teu projecte. El preu extra per aquesta opció és de 30€ per pàgina.');
+  } else if (type === 'languages') {
+    this.modalTitle.set('Nombre de llenguatges');
+    this.modalMessage.set('Afegeix el nombre de llenguatges que tindrà el teu projecte. El preu extra per aquesta opció és de 30€ per llenguatge.');
+  }
+
+  // Abrir el modal directamente sin *ngIf
+  if (this.confirmationModal) {
+    this.confirmationModal.show(); // Asumiendo que tienes un método show() en tu ModalComponent
+  }
+}
+
+// Cerrar el modal
+closeModal() {
+  if (this.confirmationModal) {
+    this.confirmationModal.hide(); // Asumiendo que tienes un método hide() en tu ModalComponent
+  }
+}
 }
